@@ -18,8 +18,11 @@ class Pdftk < BaseCustom
 
   def compile
     write_stdout "compiling #{name}"
+
     #download the source and extract
     %x{ mkdir -p #{path} && curl #{source_url} -o - | tar -xz -C #{path} -f - } 
+    fail unless $? == 0
+
     write_stdout "complete compiling #{name}"
   end
 
